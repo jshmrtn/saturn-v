@@ -1,0 +1,37 @@
+{
+  "name": "saturn-v",
+  "version": "0.0.0-dev",
+  "description": "A simple Isomorphic apollo-link compatible GraphQL Client",
+  "main": "./lib/bundle.umd.js",
+  "module": "./lib/index.js",
+  "jsnext:main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "npm run test:unit && npm run test:lint",
+    "test:unit": "mocha -r ts-node/register src/**/*.spec.ts",
+    "test:lint": "tslint -c tslint.json 'src/**/*.ts'"
+  },
+  "keywords": [
+    "graphql",
+    "client.http",
+    "apollo"
+  ],
+  "author": "Jonatan Männchen <jonatan@maennchen.ch>",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-link": "^1.2.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/graphql": "^14.0.3",
+    "@types/mocha": "^5.2.5",
+    "chai": "^4.2.0",
+    "graphql": "^14.0.2",
+    "graphql-tag": "^2.10.0",
+    "mocha": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.3"
+  }
+}

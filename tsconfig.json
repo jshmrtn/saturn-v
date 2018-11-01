@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "lib",
+    "target": "es5",
+    "lib": ["es6", "dom"],
+    "removeComments": false,
+    "sourceMap": true,
+    "declaration": true,
+    "noUnusedParameters": true,
+    "noUnusedLocals": true,
+    "strict": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/test-util.ts", "src/**/*.spec.ts", "src/**/__tests__/*.ts"]
+}
