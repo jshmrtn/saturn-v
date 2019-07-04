@@ -12,11 +12,11 @@ export class SaturnVClient {
     return this.link;
   }
 
-  public request(operation: GraphQLRequest): Observable<FetchResult> {
-    return execute(this.link, operation);
+  public request<T>(operation: GraphQLRequest): Observable<FetchResult<T>> {
+    return execute(this.link, operation) as Observable<FetchResult<T>>;
   }
 
-  public oneTimeRequest(operation: GraphQLRequest): Promise<FetchResult> {
+  public oneTimeRequest<T>(operation: GraphQLRequest): Promise<FetchResult<T>> {
     return toPromise(this.request(operation));
   }
 }

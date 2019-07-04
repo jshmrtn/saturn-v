@@ -13,21 +13,21 @@ export interface GraphQLOptions {
   extensions?: Record<string, any>;
 }
 
-function compileOneTime(query: DocumentNode, client: SaturnVClient, initialOptions?: GraphQLOptions):
-  RunableExecution<Promise<FetchResult>>;
-function compileOneTime(query: DocumentNode, initialOptions?: GraphQLOptions):
-  ClientMissingExecution<Promise<FetchResult>>;
-function compileOneTime(
+function compileOneTime<T>(query: DocumentNode, client: SaturnVClient, initialOptions?: GraphQLOptions):
+  RunableExecution<Promise<FetchResult<T>>>;
+function compileOneTime<T>(query: DocumentNode, initialOptions?: GraphQLOptions):
+  ClientMissingExecution<Promise<FetchResult<T>>>;
+function compileOneTime<T>(
   query: DocumentNode,
   clientOrInitialOptions?: SaturnVClient | GraphQLOptions,
   initialOptions?: GraphQLOptions,
 ):
-  RunableExecution<Promise<FetchResult>> | ClientMissingExecution<Promise<FetchResult>> {
+  RunableExecution<Promise<FetchResult<T>>> | ClientMissingExecution<Promise<FetchResult<T>>> {
   if (clientOrInitialOptions instanceof SaturnVClient) {
     return (
       variables?: Variables,
       options?: GraphQLOptions,
-    ) => clientOrInitialOptions.oneTimeRequest({
+    ) => clientOrInitialOptions.oneTimeRequest<T>({
       ...initialOptions,
       ...options,
       query,
@@ -42,7 +42,7 @@ function compileOneTime(
     client: SaturnVClient,
     variables?: Variables,
     options?: GraphQLOptions,
-  ) => client.oneTimeRequest({
+  ) => client.oneTimeRequest<T>({
     ...clientOrInitialOptions,
     ...initialOptions,
     ...options,
@@ -56,21 +56,21 @@ function compileOneTime(
   });
 }
 
-function compile(query: DocumentNode, client: SaturnVClient, initialOptions?: GraphQLOptions):
-  RunableExecution<Observable<FetchResult>>;
-function compile(query: DocumentNode, initialOptions?: GraphQLOptions):
-  ClientMissingExecution<Observable<FetchResult>>;
-function compile(
+function compile<T>(query: DocumentNode, client: SaturnVClient, initialOptions?: GraphQLOptions):
+  RunableExecution<Observable<FetchResult<T>>>;
+function compile<T>(query: DocumentNode, initialOptions?: GraphQLOptions):
+  ClientMissingExecution<Observable<FetchResult<T>>>;
+function compile<T>(
   query: DocumentNode,
   clientOrInitialOptions?: SaturnVClient | GraphQLOptions,
   initialOptions?: GraphQLOptions,
 ):
-  RunableExecution<Observable<FetchResult>> | ClientMissingExecution<Observable<FetchResult>> {
+  RunableExecution<Observable<FetchResult<T>>> | ClientMissingExecution<Observable<FetchResult<T>>> {
   if (clientOrInitialOptions instanceof SaturnVClient) {
     return (
       variables?: Variables,
       options?: GraphQLOptions,
-    ) => clientOrInitialOptions.request({
+    ) => clientOrInitialOptions.request<T>({
       ...initialOptions,
       ...options,
       query,
@@ -85,7 +85,7 @@ function compile(
     client: SaturnVClient,
     variables?: Variables,
     options?: GraphQLOptions,
-  ) => client.request({
+  ) => client.request<T>({
     ...clientOrInitialOptions,
     ...initialOptions,
     ...options,

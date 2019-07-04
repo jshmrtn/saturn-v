@@ -1,4 +1,4 @@
-import { ApolloLink } from "apollo-link";
+import { ApolloLink, FetchResult } from "apollo-link";
 import { expect } from "chai";
 import "mocha";
 import Observable from "zen-observable-ts";
@@ -9,7 +9,7 @@ describe("SaturnVClient", () => {
 
   describe("getLink", () => {
     it("should normalize a request handler", () => {
-      const requestHandler = () => Observable.of();
+      const requestHandler = () => Observable.of() as Observable<FetchResult>;
       const client = new SaturnVClient(requestHandler);
       expect(client.getLink()).to.be.an.instanceof(ApolloLink);
     });
@@ -27,7 +27,7 @@ describe("SaturnVClient", () => {
         return new Observable((observer) => {
           observer.next(testResult);
           observer.complete();
-        });
+        }) as Observable<FetchResult>;
       };
       const client = new SaturnVClient(requestHandler);
 
@@ -39,9 +39,9 @@ describe("SaturnVClient", () => {
     it("should relay request and response directly to apollo link", async () => {
       const requestHandler = () => {
         return new Observable((observer) => {
-          observer.next("RESULT");
+          observer.next({ data: { result: "RESULT" }});
           observer.complete();
-        });
+        }) as Observable<FetchResult>;
       };
       const client = new SaturnVClient(requestHandler);
 
