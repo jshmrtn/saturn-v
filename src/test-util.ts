@@ -11,6 +11,17 @@ export interface ClientTestResultType {
   variables?: any;
 }
 
+export interface SampleQuery {
+  stub: SampleQueryResult | null;
+}
+
+// tslint:disable-next-line
+export interface SampleQueryVariables {}
+
+export interface SampleQueryResult {
+  result: "SUCCESS";
+}
+
 export const sampleQuery = gql`
   query SampleQuery {
     stub {
