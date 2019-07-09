@@ -1,6 +1,6 @@
 {
   "name": "@jshmrtn/saturn-v",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple Isomorphic apollo-link compatible GraphQL Client",
   "main": "./lib/bundle.umd.js",
   "module": "./lib/index.js",
